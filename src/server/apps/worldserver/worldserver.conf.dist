@@ -116,9 +116,9 @@ BindIP = "0.0.0.0"
 #                     "127.0.0.1;3306;acore;acore;acore_world"      - (WorldDatabaseInfo)
 #                     "127.0.0.1;3306;acore;acore;acore_characters" - (CharacterDatabaseInfo)
 
-LoginDatabaseInfo     = "127.0.0.1;3306;acore;acore;acore_auth"
-WorldDatabaseInfo     = "127.0.0.1;3306;acore;acore;acore_world"
-CharacterDatabaseInfo = "127.0.0.1;3306;acore;acore;acore_characters"
+LoginDatabaseInfo     = "127.0.0.1;3306;acore;tralala12;acore_auth"
+WorldDatabaseInfo     = "127.0.0.1;3306;acore;tralala12;acore_world"
+CharacterDatabaseInfo = "127.0.0.1;3306;acore;tralala12;acore_characters"
 
 #
 #    LoginDatabase.WorkerThreads
@@ -179,7 +179,7 @@ Database.Reconnect.Attempts = 20
 #        Example:     "@prefix@\home\youruser\azerothcore\data"
 #        Default:     "."
 
-DataDir = "."
+DataDir = "/home/acore/acore/run/etc"
 
 #
 #    LogsDir
@@ -189,7 +189,7 @@ DataDir = "."
 #        Example:     "/home/youruser/azerothcore/logs"
 #        Default:     "" - (Log files will be stored in the current path)
 
-LogsDir = ""
+LogsDir = "/home/acore/acore/run/bin"
 
 #
 #    TempDir
@@ -246,7 +246,7 @@ MySQLExecutable = ""
 #        Example:     "./world.pid" - (Enabled)
 #        Default:     ""            - (Disabled)
 
-PidFile = ""
+PidFile = "/home/acore/acore/run/bin/worldserver.pid"
 
 #
 ###################################################################################################
@@ -429,7 +429,7 @@ Ra.MinLevel = 3
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-SOAP.Enabled = 0
+SOAP.Enabled = 1
 
 #
 #    SOAP.IP
@@ -899,7 +899,7 @@ World.RealmAvailability = 1
 #                     16 - (FFA_PVP, Free for all PvP mode like arena PvP in all zones except rest
 #                          activated places and sanctuaries)
 
-GameType = 0
+GameType = 16
 
 #
 #    RealmZone
@@ -1115,7 +1115,7 @@ MaxWhoListReturns = 49
 #                     1  - (Enabled, prevent players AFK from being logged out in Sanctuary zones)
 #                     2  - (Enabled, prevent players AFK from being logged out in all zones)
 
-PreventAFKLogout = 0
+PreventAFKLogout = 2
 
 #
 ###################################################################################################
@@ -1497,7 +1497,7 @@ Command.LookupMaxResults = 0
 #        Default:     1 - (Enabled)
 #                     0 - (Disabled)
 
-Die.Command.Mode = 1
+Die.Command.Mode = 0
 
 #
 ###################################################################################################
@@ -1720,7 +1720,7 @@ PlayerSaveInterval = 900000
 #        Default:     0  - (Disabled, Do not save character stats)
 #                     1+ - (Enabled, Level beyond which character stats are saved)
 
-PlayerSave.Stats.MinLevel = 0
+PlayerSave.Stats.MinLevel = 1
 
 #
 #    PlayerSave.Stats.SaveOnlyOnLogout
@@ -1728,7 +1728,7 @@ PlayerSave.Stats.MinLevel = 0
 #        Default:     1 - (Enabled, Only save on logout)
 #                     0 - (Disabled, Save on every player save)
 
-PlayerSave.Stats.SaveOnlyOnLogout = 1
+PlayerSave.Stats.SaveOnlyOnLogout = 0
 
 #
 #    CleanCharacterDB
@@ -1967,7 +1967,7 @@ StartHeroicPlayerLevel = 55
 #                     1 - (Show intro only for first character of selected race)
 #                     2 - (Disable intro for all classes)
 
-SkipCinematics = 0
+SkipCinematics = 2
 
 #
 #    StartPlayerMoney
@@ -1975,7 +1975,7 @@ SkipCinematics = 0
 #        Default:     0
 #                     100 - (1 Silver)
 
-StartPlayerMoney = 0
+StartPlayerMoney = 1000000
 
 #
 #    StartHeroicPlayerMoney
@@ -1983,7 +1983,7 @@ StartPlayerMoney = 0
 #        Default:     2000
 #                     2000 - (20 Silver)
 
-StartHeroicPlayerMoney = 2000
+StartHeroicPlayerMoney = 2000000
 
 #
 #     PlayerStart.String
@@ -2057,7 +2057,7 @@ Rate.MoveSpeed.NPC = 1
 #        Description: Damage after fall rate.
 #        Default:     1
 
-Rate.Damage.Fall = 1
+Rate.Damage.Fall = 0.5
 
 #
 #    Rate.Talent
@@ -2193,7 +2193,7 @@ SpellQueue.Window = 400
 #        Range:       0-11
 #        Default:     2
 
-MaxPrimaryTradeSkill = 2
+MaxPrimaryTradeSkill = 11
 
 #
 #    SkillChance.Prospecting
@@ -2350,11 +2350,11 @@ MaxGroupXPDistance = 74
 #                     1 - (Rate.XP.Explore)
 #                     1 - (Rate.XP.Pet)
 
-Rate.XP.Kill      = 1
-Rate.XP.Quest     = 1
-Rate.XP.Quest.DF  = 1
-Rate.XP.Explore   = 1
-Rate.XP.Pet       = 1
+Rate.XP.Kill      = 4
+Rate.XP.Quest     = 7
+Rate.XP.Quest.DF  = 4
+Rate.XP.Explore   = 4
+Rate.XP.Pet       = 4
 
 #
 #    Rate.XP.BattlegroundKill...
@@ -2550,7 +2550,7 @@ DurabilityLossChance.Block = 0.05
 #                     MaxPlayerLevel+1 - (Disabled)
 #                     -10              - (Enabled, Level 1+ characters have 10 minute duration)
 
-Death.SicknessLevel = 11
+Death.SicknessLevel = 81
 
 #
 #    Death.CorpseReclaimDelay.PvP
@@ -2681,12 +2681,12 @@ DBC.EnforceItemAttributes = 1
 Rate.Drop.Item.Poor             = 1
 Rate.Drop.Item.Normal           = 1
 Rate.Drop.Item.Uncommon         = 1
-Rate.Drop.Item.Rare             = 1
-Rate.Drop.Item.Epic             = 1
-Rate.Drop.Item.Legendary        = 1
-Rate.Drop.Item.Artifact         = 1
+Rate.Drop.Item.Rare             = 2
+Rate.Drop.Item.Epic             = 3
+Rate.Drop.Item.Legendary        = 4
+Rate.Drop.Item.Artifact         = 5
 Rate.Drop.Item.Referenced       = 1
-Rate.Drop.Money                 = 1
+Rate.Drop.Money                 = 20
 
 #    Rate.Drop.Item.ReferencedAmount
 #        Description: Multiplier for referenced loot amount. Makes many raid bosses (and others) drop additional loot.
@@ -2809,7 +2809,7 @@ Rate.RewardBonusMoney = 1
 #                     Increases CONFIG_SIGHT_MONSTER to 50 yards. Used to be 20 yards.
 #        Default:     50.000000
 
-MonsterSight = 50.000000
+MonsterSight = 25.000000
 
 #
 #    Rate.Creature.Aggro
@@ -2818,7 +2818,7 @@ MonsterSight = 50.000000
 #                     1.5 - (Enabled, 150%)
 #                     0   - (Disabled, 0%)
 
-Rate.Creature.Aggro = 1
+Rate.Creature.Aggro = 0.5
 
 #
 #    CreatureFamilyFleeAssistanceRadius
@@ -2826,7 +2826,7 @@ Rate.Creature.Aggro = 1
 #        Default:     30 - (Enabled)
 #                     0  - (Disabled)
 
-CreatureFamilyFleeAssistanceRadius = 30
+CreatureFamilyFleeAssistanceRadius = 10
 
 #
 #    CreatureLeashRadius
@@ -2834,7 +2834,7 @@ CreatureFamilyFleeAssistanceRadius = 30
 #        Default:     30 - (Enabled)
 #                     0  - (Disabled)
 
-CreatureLeashRadius = 30
+CreatureLeashRadius = 10
 
 #
 #    CreatureFamilyAssistanceRadius
@@ -3135,7 +3135,7 @@ Group.Raid.LevelRestriction = 10
 #        Default:     0 - (Disabled, Only GM accounts can be summoned by GM)
 #                     1 - (Enabled, GM and Player accounts can be summoned by GM)
 
-Instance.GMSummonPlayer = 0
+Instance.GMSummonPlayer = 1
 
 #
 #    Instance.IgnoreLevel
@@ -3151,7 +3151,7 @@ Instance.IgnoreLevel = 0
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-Instance.IgnoreRaid = 0
+Instance.IgnoreRaid = 1
 
 #
 #    Instance.ResetTimeHour
@@ -3370,7 +3370,7 @@ Guild.BankEventLogRecordsCount = 25
 #        Range:       0-9
 #        Default:     9
 
-MinPetitionSigns = 9
+MinPetitionSigns = 0
 
 #
 #    Guild.CharterCost
@@ -3602,14 +3602,14 @@ Battleground.Random.ResetHour = 6
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-Battleground.StoreStatistics.Enable = 0
+Battleground.StoreStatistics.Enable = 1
 
 #    Battleground.TrackDeserters.Enable
 #        Description: Track deserters of Battlegrounds.
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-Battleground.TrackDeserters.Enable = 0
+Battleground.TrackDeserters.Enable = 1
 
 #
 #    Battleground.InvitationType
@@ -4329,7 +4329,7 @@ Calendar.DeleteOldEventsHour = 6
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
-Event.Announce = 0
+Event.Announce = 1
 
 #
 ###################################################################################################
@@ -4560,6 +4560,26 @@ Respawn.DynamicMinimumGameObject = 10
 #
 ###################################################################################################
 
+# PVP Elite Announcers#
+###################
+#
+#     KilledByCreature.Announcer
+#        Announce Player Killed by Creature to server.
+#        Default:     1 (Default)
+#                      0 (Disabled)
+
+KilledByCreature.Announcer = 1
+
+#
+#     PvPKill.Announcer
+#        Announce Player Killed by PVP to server.
+#        Default:     1 (Default)
+#                      0 (Disabled)
+
+PvPKill.Announcer = 1
+
+#
+
 ###################################################################################################
 # NPCBOT CONFIGURATION
 #
@@ -4586,7 +4606,7 @@ NpcBot.LogToDB = 1
 #                     0,1,2,3,4,5,6,7,8 - (1 per 10 levels)
 #        Max:         39
 
-NpcBot.MaxBots = 39,39,39,39,39,39,39,39,39
+NpcBot.MaxBots = 2,2,2,2,2,2,2,2,2
 
 #
 #    NpcBot.MaxBotsPerClass
