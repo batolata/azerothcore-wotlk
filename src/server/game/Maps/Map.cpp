@@ -44,6 +44,10 @@
 #include "VMapMgr2.h"
 #include "Weather.h"
 
+//npcbot
+#include "botmgr.h"
+//end npcbot
+
 #define MAP_INVALID_ZONE        0xFFFFFFFF
 
 ZoneDynamicInfo::ZoneDynamicInfo() : MusicId(0), WeatherId(WEATHER_STATE_FINE),
@@ -425,6 +429,9 @@ bool Map::AddToMap(T* obj, bool checkTransport)
     //obj->SetMap(this);
     obj->AddToWorld();
 
+    //npcbot: do not add bots to transport (handled inside AI)
+    if (!obj->IsNPCBotOrPet())
+    //end npcbot
     if (checkTransport)
         if (!(obj->IsGameObject() && obj->ToGameObject()->IsTransport())) // dont add transport to transport ;d
             if (Transport* transport = GetTransportForPos(obj->GetPhaseMask(), obj->GetPositionX(), obj->GetPositionY(), obj->GetPositionZ(), obj))
@@ -876,6 +883,21 @@ void Map::CreatureRelocation(Creature* creature, float x, float y, float z, floa
     }
     else
         RemoveCreatureFromMoveList(creature);
+
+    //npcbot:
+    if (creature->IsNPCBotOrPet() && !creature->GetVehicle())
+    {
+        float old_orientation = creature->GetOrientation();
+        float current_z = creature->GetPositionZ();
+        bool turn = (old_orientation != o);
+        bool relocated = (creature->GetPositionX() != x || creature->GetPositionY() != y || current_z != z);
+        uint32 mask = 0;
+        if (turn) mask |= AURA_INTERRUPT_FLAG_TURNING;
+        if (relocated) mask |= AURA_INTERRUPT_FLAG_MOVE;
+        if (mask)
+            creature->RemoveAurasWithInterruptFlags(mask);
+    }
+    //end npcbot
 
     creature->Relocate(x, y, z, o);
     if (creature->IsVehicle())
@@ -1929,7 +1951,26 @@ uint32 Map::GetPlayersCountExceptGMs() const
     uint32 count = 0;
     for (MapRefMgr::const_iterator itr = m_mapRefMgr.begin(); itr != m_mapRefMgr.end(); ++itr)
         if (!itr->GetSource()->IsGameMaster())
+        //npcbot - count npcbots as group members (event if not in group)
+        {
+            if (itr->GetSource()->HaveBot() && BotMgr::LimitBots(this))
+            {
+                ++count;
+                BotMap const* botmap = itr->GetSource()->GetBotMgr()->GetBotMap();
+                for (BotMap::const_iterator itr = botmap->begin(); itr != botmap->end(); ++itr)
+                {
+                    Creature* cre = itr->second;
+                    if (!cre || !cre->IsInWorld() || cre->FindMap() != this || cre->IsTempBot())
+                        continue;
+                    ++count;
+                }
+                continue;
+            }
+        //end npcbot
             ++count;
+        //npcbot
+        }
+        //end npcbot
     return count;
 }
 
