@@ -1230,6 +1230,8 @@ private:
     uint32 _timeSyncNextCounter;
     uint32 _timeSyncTimer;
 
+    bool _isBot;
+
     WorldSession(WorldSession const& right) = delete;
     WorldSession& operator=(WorldSession const& right) = delete;
 };
