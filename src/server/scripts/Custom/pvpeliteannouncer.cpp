@@ -5,6 +5,7 @@ Refactored by JAGPH TeaM
 #include "Player.h"
 #include "Creature.h"
 #include "World.h"
+#include "WorldSessionMgr.h"
 
 
 class pvpelite_announcer : public PlayerScript
@@ -27,7 +28,7 @@ public:
                 stream << "|CFF" << tag_colour <<
                     "|r|cff" << plr_colour << " " << plr <<
                     "|r killed by the elite |CFF" << creature_colour << "" << creature_n << "|r " "creature" << "!";
-                sWorld->SendServerMessage(SERVER_MSG_STRING, stream.str().c_str());
+                sWorldSessionMgr->SendServerMessage(SERVER_MSG_STRING, stream.str().c_str());
             }
         }
 
@@ -42,7 +43,7 @@ public:
             stream << "|CFF" << tag_colour <<
                 "|r|cff" << plr_colour << " " << plr <<
                 "|r killed by the legendary |CFF" << creature_colour << "" << creature_n << "|r " "world boss" << "!";
-            sWorld->SendServerMessage(SERVER_MSG_STRING, stream.str().c_str());
+            sWorldSessionMgr->SendServerMessage(SERVER_MSG_STRING, stream.str().c_str());
         }
 
         if (killer->IsDungeonBoss())
@@ -56,7 +57,7 @@ public:
             stream << "|CFF" << tag_colour <<
                 "|r|cff" << plr_colour << " " << plr <<
                 "|r killed by the mighty |CFF" << creature_colour << "" << creature_n << "|r " "dungeon boss" << "!";
-            sWorld->SendServerMessage(SERVER_MSG_STRING, stream.str().c_str());
+            sWorldSessionMgr->SendServerMessage(SERVER_MSG_STRING, stream.str().c_str());
         }
     }
 
@@ -75,7 +76,7 @@ public:
                 stream << "|CFF" << tag_colour <<
                     "|r|cff" << plr_colour << " " << plr <<
                     "|r killed by |CFF" << creature_colour << "" << creature_n << "|r " "player" << "!";
-                sWorld->SendServerMessage(SERVER_MSG_STRING, stream.str().c_str());
+                sWorldSessionMgr->SendServerMessage(SERVER_MSG_STRING, stream.str().c_str());
             }
         }
     }
