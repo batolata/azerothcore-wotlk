@@ -60,26 +60,6 @@ public:
             sWorldSessionMgr->SendServerMessage(SERVER_MSG_STRING, stream.str().c_str());
         }
     }
-
-    void OnPVPKill(Player* killer, Player* killed)
-    {
-        if (sConfigMgr->GetOption("PvPKill.Announcer", true))
-        {
-            if (killer->IsPlayer())
-            {
-                std::string plr = killed->GetName();
-                std::string creature_n = killer->GetName();
-                std::string tag_colour = "7bbef7";
-                std::string plr_colour = "7bbef7";
-                std::string creature_colour = "ff0000";
-                std::ostringstream stream;
-                stream << "|CFF" << tag_colour <<
-                    "|r|cff" << plr_colour << " " << plr <<
-                    "|r killed by |CFF" << creature_colour << "" << creature_n << "|r " "player" << "!";
-                sWorldSessionMgr->SendServerMessage(SERVER_MSG_STRING, stream.str().c_str());
-            }
-        }
-    }
 };
 
 void AddSC_pvpelite_announcer()
