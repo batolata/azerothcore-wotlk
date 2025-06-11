@@ -4576,7 +4576,7 @@ KilledByCreature.Announcer = 1
 #        Default:     1 (Default)
 #                      0 (Disabled)
 
-PvPKill.Announcer = 1
+# PvPKill.Announcer = 1
 
 #
 
