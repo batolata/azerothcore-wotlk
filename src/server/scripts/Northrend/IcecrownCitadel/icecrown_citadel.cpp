@@ -125,7 +125,6 @@ enum Spells
     SPELL_IMPALING_SPEAR_KILL       = 70196,
     SPELL_REVIVE_CHAMPION           = 70053,
     SPELL_UNDEATH                   = 70089,
-    SPELL_IMPALING_SPEAR            = 71443,
     SPELL_AETHER_SHIELD             = 71463,
     SPELL_HURL_SPEAR                = 71466,
 
