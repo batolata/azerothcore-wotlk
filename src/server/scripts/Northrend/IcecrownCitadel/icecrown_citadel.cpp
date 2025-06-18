@@ -1123,14 +1123,6 @@ public:
                 case SPELL_IMPALING_SPEAR_KILL:
                     Unit::Kill(me, target);
                     break;
-                case SPELL_IMPALING_SPEAR:
-                    if (TempSummon* summon = target->SummonCreature(NPC_IMPALING_SPEAR, *target))
-                    {
-                        Talk(EMOTE_SVALNA_IMPALE, target);
-                        summon->CastCustomSpell(VEHICLE_SPELL_RIDE_HARDCODED, SPELLVALUE_BASE_POINT0, 1, target, false);
-                        summon->SetUnitFlag2(UNIT_FLAG2_HIDE_BODY | UNIT_FLAG2_ALLOW_ENEMY_INTERACT);
-                    }
-                    break;
                 default:
                     break;
             }
@@ -1159,15 +1151,6 @@ public:
                     break;
                 case EVENT_SVALNA_COMBAT:
                     Talk(SAY_SVALNA_AGGRO);
-                    break;
-                case EVENT_IMPALING_SPEAR:
-                    if (Unit* target = SelectTarget(SelectTargetMethod::Random, 0, 0.0f, true, false, -SPELL_IMPALING_SPEAR))
-                    {
-                        DoCast(me, SPELL_AETHER_SHIELD);
-                        me->AddAura(70203, me);
-                        DoCast(target, SPELL_IMPALING_SPEAR);
-                    }
-                    events.ScheduleEvent(EVENT_IMPALING_SPEAR, 20s, 25s);
                     break;
                 default:
                     break;
@@ -2131,32 +2114,6 @@ class spell_svalna_revive_champion : public SpellScript
     {
         OnObjectAreaTargetSelect += SpellObjectAreaTargetSelectFn(spell_svalna_revive_champion::RemoveAliveTarget, EFFECT_0, TARGET_UNIT_DEST_AREA_ENTRY);
         OnEffectHit += SpellEffectFn(spell_svalna_revive_champion::Land, EFFECT_0, SPELL_EFFECT_SCRIPT_EFFECT);
-    }
-};
-
-class spell_svalna_remove_spear : public SpellScript
-{
-    PrepareSpellScript(spell_svalna_remove_spear);
-
-    bool Validate(SpellInfo const* /*spellInfo*/) override
-    {
-        return ValidateSpellInfo({ SPELL_IMPALING_SPEAR });
-    }
-
-    void HandleScript(SpellEffIndex effIndex)
-    {
-        PreventHitDefaultEffect(effIndex);
-        if (Creature* target = GetHitCreature())
-        {
-            if (Unit* vehicle = target->GetVehicleBase())
-                vehicle->RemoveAurasDueToSpell(SPELL_IMPALING_SPEAR);
-            target->DespawnOrUnsummon(1);
-        }
-    }
-
-    void Register() override
-    {
-        OnEffectHitTarget += SpellEffectFn(spell_svalna_remove_spear::HandleScript, EFFECT_0, SPELL_EFFECT_SCRIPT_EFFECT);
     }
 };
 
@@ -3671,7 +3628,6 @@ void AddSC_icecrown_citadel()
     RegisterSpellScriptWithArgs(spell_trigger_spell_from_caster, "spell_svalna_caress_of_death", SPELL_IMPALING_SPEAR_KILL);
 
     RegisterSpellScript(spell_svalna_revive_champion);
-    RegisterSpellScript(spell_svalna_remove_spear);
     RegisterSpellScript(spell_icc_soul_missile);
     new at_icc_saurfang_portal();
     new at_icc_shutdown_traps();
