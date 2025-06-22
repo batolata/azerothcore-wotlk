@@ -15,6 +15,9 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "AchievementCriteriaScript.h"
+#include "AreaDefines.h"
+#include "Config.h"
 #include "CreatureTextMgr.h"
 #include "GameTime.h"
 #include "MoveSpline.h"
@@ -25,6 +28,12 @@
 #include "TransportMgr.h"
 #include "Vehicle.h"
 #include "icecrown_citadel.h"
+#include "PassiveAI.h"
+#include "SpellAuraEffects.h"
+
+//npcbot
+#include "botmgr.h"
+//end npcbot
 
 enum Texts
 {
@@ -603,6 +612,15 @@ public:
                         continue;
                     (*itr)->ToCreature()->CastSpell((*itr)->ToCreature(), explosionSpell, true);
                 }
+
+                //npcbot: kill bots
+                Transport::PassengerSet const& allpassengers = t->GetPassengers();
+                for (Transport::PassengerSet::const_iterator citr = allpassengers.begin(); citr != allpassengers.end(); ++citr)
+                {
+                    if ((*citr)->GetTypeId() == TYPEID_PLAYER && (*citr)->ToPlayer()->HaveBot())
+                        (*citr)->ToPlayer()->GetBotMgr()->KillAllBots();
+                }
+                //end npcbot
             }
 
             uint32 cannonEntry = _teamIdInInstance == TEAM_HORDE ? NPC_HORDE_GUNSHIP_CANNON : NPC_ALLIANCE_GUNSHIP_CANNON;
@@ -1622,6 +1640,22 @@ struct npc_gunship_boarding_addAI : public ScriptedAI
                         p->SetInCombatWith(me);
                         me->AddThreat(p, 0.0f);
                     }
+                    //npcbot: check bots
+                    else if (p->HaveBot())
+                    {
+                        BotMap const* bmap = p->GetBotMgr()->GetBotMap();
+                        for (BotMap::const_iterator citr = bmap->begin(); citr != bmap->end(); ++citr)
+                        {
+                            if (citr->second && CanAIAttack(citr->second) && me->IsValidAttackTarget(citr->second))
+                            {
+                                anyValid = true;
+                                me->SetInCombatWith(citr->second);
+                                citr->second->SetInCombatWith(me);
+                                me->AddThreat(citr->second, 0.0f);
+                            }
+                        }
+                    }
+                    //end npcbot
         }
         else
             checkTimer -= diff;
@@ -1864,6 +1898,22 @@ public:
                             p->SetInCombatWith(me);
                             me->AddThreat(p, 0.0f);
                         }
+                        //npcbot: check bots
+                        else if (p->HaveBot())
+                        {
+                            BotMap const* bmap = p->GetBotMgr()->GetBotMap();
+                            for (BotMap::const_iterator citr = bmap->begin(); citr != bmap->end(); ++citr)
+                            {
+                                if (citr->second && CanAIAttack(citr->second) && me->IsValidAttackTarget(citr->second))
+                                {
+                                    anyValid = true;
+                                    me->SetInCombatWith(citr->second);
+                                    citr->second->SetInCombatWith(me);
+                                    me->AddThreat(citr->second, 0.0f);
+                                }
+                            }
+                        }
+                        //end npcbot
             }
             else
                 checkTimer -= diff;
@@ -2367,14 +2417,14 @@ public:
     }
 };
 
-class spell_igb_cannon_blast : public SpellScriptLoader
+class spell_igb_consume_soul : public SpellScriptLoader
 {
 public:
-    spell_igb_cannon_blast() : SpellScriptLoader("spell_igb_cannon_blast") { }
+    spell_igb_consume_soul() : SpellScriptLoader("spell_igb_consume_soul") { }
 
-    class spell_igb_cannon_blast_SpellScript : public SpellScript
+    class spell_igb_consume_soul_SpellScript : public SpellScript
     {
-        PrepareSpellScript(spell_igb_cannon_blast_SpellScript);
+        PrepareSpellScript(spell_igb_consume_soul_SpellScript);
 
         bool Load() override
         {
@@ -2394,13 +2444,13 @@ public:
 
         void Register() override
         {
-            AfterHit += SpellHitFn(spell_igb_cannon_blast_SpellScript::CheckEnergy);
+            AfterHit += SpellHitFn(spell_igb_consume_soul_SpellScript::CheckEnergy);
         }
     };
 
     SpellScript* GetSpellScript() const override
     {
-        return new spell_igb_cannon_blast_SpellScript();
+        return new spell_igb_consume_soul_SpellScript();
     }
 };
 
@@ -2757,7 +2807,7 @@ void AddSC_boss_icecrown_gunship_battle()
     new spell_igb_teleport_players_on_victory();
     new spell_igb_periodic_trigger_with_power_cost();
     new spell_igb_overheat();
-    new spell_igb_cannon_blast();
+    new spell_igb_consume_soul();
     new spell_igb_incinerating_blast();
     new spell_igb_burning_pitch_selector();
     new spell_igb_burning_pitch();
