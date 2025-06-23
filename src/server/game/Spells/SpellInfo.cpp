@@ -1910,7 +1910,7 @@ SpellCastResult SpellInfo::CheckTarget(Unit const* caster, WorldObject const* ta
     else return SPELL_CAST_OK;
 
     // corpseOwner and unit specific target checks
-        if (unitTarget->IsPlayer())
+    if (unitTarget->IsPlayer())
     {
         if (HasAttribute(SPELL_ATTR5_NOT_ON_PLAYER))
             return SPELL_FAILED_TARGET_IS_PLAYER;
