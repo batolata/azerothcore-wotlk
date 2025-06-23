@@ -1918,6 +1918,9 @@ SpellCastResult SpellInfo::CheckTarget(Unit const* caster, WorldObject const* ta
     else
     {
         if (HasAttribute(SPELL_ATTR3_ONLY_ON_PLAYER))
+        //npcbot: allow to target bots
+        if (!unitTarget->IsNPCBot())
+        //end npcbot
             return SPELL_FAILED_TARGET_NOT_PLAYER;
 
         if (HasAttribute(SPELL_ATTR5_NOT_ON_PLAYER_CONTROLLED_NPC) && unitTarget->IsControlledByPlayer())
