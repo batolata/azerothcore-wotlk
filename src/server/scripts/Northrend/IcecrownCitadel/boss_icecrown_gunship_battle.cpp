@@ -1997,14 +1997,14 @@ public:
     }
 };
 
-class spell_igb_rocket_pack : public SpellScriptLoader
+class spell_igb_rocket_pack_aura : public SpellScriptLoader
 {
 public:
-    spell_igb_rocket_pack() : SpellScriptLoader("spell_igb_rocket_pack") { }
+    spell_igb_rocket_pack_aura() : SpellScriptLoader("spell_igb_rocket_pack_aura") { }
 
-    class spell_igb_rocket_pack_AuraScript : public AuraScript
+    class spell_igb_rocket_pack_aura_AuraScript : public AuraScript
     {
-        PrepareAuraScript(spell_igb_rocket_pack_AuraScript);
+        PrepareAuraScript(spell_igb_rocket_pack_aura_AuraScript);
 
         bool Validate(SpellInfo const* /*spellInfo*/) override
         {
@@ -2030,25 +2030,25 @@ public:
 
         void Register() override
         {
-            OnEffectPeriodic += AuraEffectPeriodicFn(spell_igb_rocket_pack_AuraScript::HandlePeriodic, EFFECT_0, SPELL_AURA_PERIODIC_DUMMY);
-            OnEffectRemove += AuraEffectRemoveFn(spell_igb_rocket_pack_AuraScript::HandleRemove, EFFECT_0, SPELL_AURA_PERIODIC_DUMMY, AURA_EFFECT_HANDLE_REAL);
+            OnEffectPeriodic += AuraEffectPeriodicFn(spell_igb_rocket_pack_aura_AuraScript::HandlePeriodic, EFFECT_0, SPELL_AURA_PERIODIC_DUMMY);
+            OnEffectRemove += AuraEffectRemoveFn(spell_igb_rocket_pack_aura_AuraScript::HandleRemove, EFFECT_0, SPELL_AURA_PERIODIC_DUMMY, AURA_EFFECT_HANDLE_REAL);
         }
     };
 
     AuraScript* GetAuraScript() const override
     {
-        return new spell_igb_rocket_pack_AuraScript();
+        return new spell_igb_rocket_pack_aura_AuraScript();
     }
 };
 
-class spell_igb_rocket_pack_useable : public SpellScriptLoader
+class spell_igb_rocket_pack_useable_aura : public SpellScriptLoader
 {
 public:
-    spell_igb_rocket_pack_useable() : SpellScriptLoader("spell_igb_rocket_pack_useable") { }
+    spell_igb_rocket_pack_useable_aura() : SpellScriptLoader("spell_igb_rocket_pack_useable_aura") { }
 
-    class spell_igb_rocket_pack_useable_AuraScript : public AuraScript
+    class spell_igb_rocket_pack_useable_aura_AuraScript : public AuraScript
     {
-        PrepareAuraScript(spell_igb_rocket_pack_useable_AuraScript);
+        PrepareAuraScript(spell_igb_rocket_pack_useable_aura_AuraScript);
 
         bool Load() override
         {
@@ -2078,15 +2078,15 @@ public:
 
         void Register() override
         {
-            DoCheckAreaTarget += AuraCheckAreaTargetFn(spell_igb_rocket_pack_useable_AuraScript::CheckAreaTarget);
-            AfterEffectApply += AuraEffectApplyFn(spell_igb_rocket_pack_useable_AuraScript::HandleApply, EFFECT_0, SPELL_AURA_DUMMY, AURA_EFFECT_HANDLE_REAL);
-            AfterEffectRemove += AuraEffectRemoveFn(spell_igb_rocket_pack_useable_AuraScript::HandleRemove, EFFECT_0, SPELL_AURA_DUMMY, AURA_EFFECT_HANDLE_REAL);
+            DoCheckAreaTarget += AuraCheckAreaTargetFn(spell_igb_rocket_pack_useable_aura_AuraScript::CheckAreaTarget);
+            AfterEffectApply += AuraEffectApplyFn(spell_igb_rocket_pack_useable_aura_AuraScript::HandleApply, EFFECT_0, SPELL_AURA_DUMMY, AURA_EFFECT_HANDLE_REAL);
+            AfterEffectRemove += AuraEffectRemoveFn(spell_igb_rocket_pack_useable_aura_AuraScript::HandleRemove, EFFECT_0, SPELL_AURA_DUMMY, AURA_EFFECT_HANDLE_REAL);
         }
     };
 
     AuraScript* GetAuraScript() const override
     {
-        return new spell_igb_rocket_pack_useable_AuraScript();
+        return new spell_igb_rocket_pack_useable_aura_AuraScript();
     }
 };
 
@@ -2212,14 +2212,14 @@ public:
     }
 };
 
-class spell_igb_explosion_main : public SpellScriptLoader
+class spell_igb_explosion_main_aura : public SpellScriptLoader
 {
 public:
-    spell_igb_explosion_main() : SpellScriptLoader("spell_igb_explosion_main") { }
+    spell_igb_explosion_main_aura() : SpellScriptLoader("spell_igb_explosion_main_aura") { }
 
-    class spell_igb_explosion_main_AuraScript : public AuraScript
+    class spell_igb_explosion_main_aura_AuraScript : public AuraScript
     {
-        PrepareAuraScript(spell_igb_explosion_main_AuraScript);
+        PrepareAuraScript(spell_igb_explosion_main_aura_AuraScript);
 
         bool Load() override
         {
@@ -2235,7 +2235,7 @@ public:
 
         void Register() override
         {
-            OnEffectPeriodic += AuraEffectPeriodicFn(spell_igb_explosion_main_AuraScript::PeriodicTick, EFFECT_0, SPELL_AURA_PERIODIC_TRIGGER_SPELL);
+            OnEffectPeriodic += AuraEffectPeriodicFn(spell_igb_explosion_main_aura_AuraScript::PeriodicTick, EFFECT_0, SPELL_AURA_PERIODIC_TRIGGER_SPELL);
         }
 
         uint32 tickNo;
@@ -2243,7 +2243,7 @@ public:
 
     AuraScript* GetAuraScript() const override
     {
-        return new spell_igb_explosion_main_AuraScript();
+        return new spell_igb_explosion_main_aura_AuraScript();
     }
 };
 
@@ -2334,14 +2334,14 @@ public:
     }
 };
 
-class spell_igb_periodic_trigger_with_power_cost : public SpellScriptLoader
+class spell_igb_periodic_trigger_with_power_cost_aura : public SpellScriptLoader
 {
 public:
-    spell_igb_periodic_trigger_with_power_cost() : SpellScriptLoader("spell_igb_periodic_trigger_with_power_cost") { }
+    spell_igb_periodic_trigger_with_power_cost_aura() : SpellScriptLoader("spell_igb_periodic_trigger_with_power_cost_aura") { }
 
-    class spell_igb_periodic_trigger_with_power_cost_AuraScript : public AuraScript
+    class spell_igb_periodic_trigger_with_power_cost_aura_AuraScript : public AuraScript
     {
-        PrepareAuraScript(spell_igb_periodic_trigger_with_power_cost_AuraScript);
+        PrepareAuraScript(spell_igb_periodic_trigger_with_power_cost_aura_AuraScript);
 
         void HandlePeriodicTick(AuraEffect const* /*aurEff*/)
         {
@@ -2351,24 +2351,24 @@ public:
 
         void Register() override
         {
-            OnEffectPeriodic += AuraEffectPeriodicFn(spell_igb_periodic_trigger_with_power_cost_AuraScript::HandlePeriodicTick, EFFECT_0, SPELL_AURA_PERIODIC_TRIGGER_SPELL);
+            OnEffectPeriodic += AuraEffectPeriodicFn(spell_igb_periodic_trigger_with_power_cost_aura_AuraScript::HandlePeriodicTick, EFFECT_0, SPELL_AURA_PERIODIC_TRIGGER_SPELL);
         }
     };
 
     AuraScript* GetAuraScript() const override
     {
-        return new spell_igb_periodic_trigger_with_power_cost_AuraScript();
+        return new spell_igb_periodic_trigger_with_power_cost_aura_AuraScript();
     }
 };
 
-class spell_igb_overheat : public SpellScriptLoader
+class spell_igb_overheat_aura : public SpellScriptLoader
 {
 public:
-    spell_igb_overheat() : SpellScriptLoader("spell_igb_overheat") { }
+    spell_igb_overheat_aura() : SpellScriptLoader("spell_igb_overheat_aura") { }
 
-    class spell_igb_overheat_AuraScript : public AuraScript
+    class spell_igb_overheat_aura_AuraScript : public AuraScript
     {
-        PrepareAuraScript(spell_igb_overheat_AuraScript);
+        PrepareAuraScript(spell_igb_overheat_aura_AuraScript);
 
         bool Load() override
         {
@@ -2406,25 +2406,25 @@ public:
 
         void Register() override
         {
-            AfterEffectApply += AuraEffectApplyFn(spell_igb_overheat_AuraScript::HandleApply, EFFECT_0, SPELL_AURA_PERIODIC_TRIGGER_SPELL, AURA_EFFECT_HANDLE_REAL);
-            AfterEffectRemove += AuraEffectRemoveFn(spell_igb_overheat_AuraScript::HandleRemove, EFFECT_0, SPELL_AURA_PERIODIC_TRIGGER_SPELL, AURA_EFFECT_HANDLE_REAL);
+            AfterEffectApply += AuraEffectApplyFn(spell_igb_overheat_aura_AuraScript::HandleApply, EFFECT_0, SPELL_AURA_PERIODIC_TRIGGER_SPELL, AURA_EFFECT_HANDLE_REAL);
+            AfterEffectRemove += AuraEffectRemoveFn(spell_igb_overheat_aura_AuraScript::HandleRemove, EFFECT_0, SPELL_AURA_PERIODIC_TRIGGER_SPELL, AURA_EFFECT_HANDLE_REAL);
         }
     };
 
     AuraScript* GetAuraScript() const override
     {
-        return new spell_igb_overheat_AuraScript();
+        return new spell_igb_overheat_aura_AuraScript();
     }
 };
 
-class spell_igb_consume_soul : public SpellScriptLoader
+class spell_igb_cannon_blast : public SpellScriptLoader
 {
 public:
-    spell_igb_consume_soul() : SpellScriptLoader("spell_igb_consume_soul") { }
+    spell_igb_cannon_blast() : SpellScriptLoader("spell_igb_cannon_blast") { }
 
-    class spell_igb_consume_soul_SpellScript : public SpellScript
+    class spell_igb_cannon_blast_SpellScript : public SpellScript
     {
-        PrepareSpellScript(spell_igb_consume_soul_SpellScript);
+        PrepareSpellScript(spell_igb_cannon_blast_SpellScript);
 
         bool Load() override
         {
@@ -2444,13 +2444,13 @@ public:
 
         void Register() override
         {
-            AfterHit += SpellHitFn(spell_igb_consume_soul_SpellScript::CheckEnergy);
+            AfterHit += SpellHitFn(spell_igb_cannon_blast_SpellScript::CheckEnergy);
         }
     };
 
     SpellScript* GetSpellScript() const override
     {
-        return new spell_igb_consume_soul_SpellScript();
+        return new spell_igb_cannon_blast_SpellScript();
     }
 };
 
@@ -2713,14 +2713,14 @@ public:
     }
 };
 
-class spell_igb_on_gunship_deck : public SpellScriptLoader
+class spell_igb_on_gunship_deck_aura : public SpellScriptLoader
 {
 public:
-    spell_igb_on_gunship_deck() : SpellScriptLoader("spell_igb_on_gunship_deck") { }
+    spell_igb_on_gunship_deck_aura() : SpellScriptLoader("spell_igb_on_gunship_deck_aura") { }
 
-    class spell_igb_on_gunship_deck_AuraScript : public AuraScript
+    class spell_igb_on_gunship_deck_aura_AuraScript : public AuraScript
     {
-        PrepareAuraScript(spell_igb_on_gunship_deck_AuraScript);
+        PrepareAuraScript(spell_igb_on_gunship_deck_aura_AuraScript);
 
         bool Load() override
         {
@@ -2745,8 +2745,8 @@ public:
 
         void Register() override
         {
-            DoCheckAreaTarget += AuraCheckAreaTargetFn(spell_igb_on_gunship_deck_AuraScript::CheckAreaTarget);
-            AfterEffectApply += AuraEffectApplyFn(spell_igb_on_gunship_deck_AuraScript::HandleApply, EFFECT_0, SPELL_AURA_DUMMY, AURA_EFFECT_HANDLE_REAL);
+            DoCheckAreaTarget += AuraCheckAreaTargetFn(spell_igb_on_gunship_deck_aura_AuraScript::CheckAreaTarget);
+            AfterEffectApply += AuraEffectApplyFn(spell_igb_on_gunship_deck_aura_AuraScript::HandleApply, EFFECT_0, SPELL_AURA_DUMMY, AURA_EFFECT_HANDLE_REAL);
         }
 
         TeamId _teamIdInInstance;
@@ -2754,7 +2754,7 @@ public:
 
     AuraScript* GetAuraScript() const override
     {
-        return new spell_igb_on_gunship_deck_AuraScript();
+        return new spell_igb_on_gunship_deck_aura_AuraScript();
     }
 };
 
@@ -2797,24 +2797,24 @@ void AddSC_boss_icecrown_gunship_battle()
     new npc_gunship_mage();
     new npc_gunship_gunner();
     new npc_gunship_rocketeer();
-    new spell_igb_rocket_pack();
-    new spell_igb_rocket_pack_useable();
+    new spell_igb_rocket_pack_aura();
+    new spell_igb_rocket_pack_useable_aura();
     new spell_igb_teleport_to_enemy_ship();
     new spell_igb_check_for_players();
     new spell_igb_gunship_fall_teleport();
-    new spell_igb_explosion_main();
+    new spell_igb_explosion_main_aura();
     new spell_igb_explosion();
     new spell_igb_teleport_players_on_victory();
-    new spell_igb_periodic_trigger_with_power_cost();
-    new spell_igb_overheat();
-    new spell_igb_consume_soul();
+    new spell_igb_periodic_trigger_with_power_cost_aura();
+    new spell_igb_overheat_aura();
+    new spell_igb_cannon_blast();
     new spell_igb_incinerating_blast();
     new spell_igb_burning_pitch_selector();
     new spell_igb_burning_pitch();
     new spell_igb_rocket_artillery();
     new spell_igb_rocket_artillery_explosion();
     new spell_igb_below_zero();
-    new spell_igb_on_gunship_deck();
+    new spell_igb_on_gunship_deck_aura();
     new achievement_im_on_a_boat();
     RegisterSpellScript(spell_igb_battle_experience_check);
 }
