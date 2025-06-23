@@ -1910,12 +1910,6 @@ SpellCastResult SpellInfo::CheckTarget(Unit const* caster, WorldObject const* ta
     else return SPELL_CAST_OK;
 
     // corpseOwner and unit specific target checks
-    if (AttributesEx3 & SPELL_ATTR3_ONLY_ON_PLAYER && !unitTarget->ToPlayer())
-        //npcbot: allow to target bots
-        if (!unitTarget->IsNPCBot())
-        //end npcbot
-        return SPELL_FAILED_TARGET_NOT_PLAYER;
-
     if (!IsAllowingDeadTarget() && !unitTarget->IsAlive())
         return SPELL_FAILED_TARGETS_DEAD;
 
