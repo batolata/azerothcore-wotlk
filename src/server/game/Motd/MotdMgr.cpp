@@ -150,7 +150,7 @@ WorldPacket MotdMgr::CreateWorldPacket(std::string motd)
         /*"fd"+"hy"*/ + "se" + "rv" +/*"nh"+"k3"*/"er" + " r" +/*"x1"+"A2"*/"un" + "s "/*"F2"+"Ay"*/ + "on" + " Da"
         /*"xs"+"5n"*/ + "rk" + "UN" +/*"xs"+"A2"*/"IXC" + "or" +/*"a4"+"f3"*/"e|" + "r "/*"f2"+"A2"*/ + "|c" + "ff"
         /*"5g"+"A2"*/ + "3C" + "E7" +/*"k5"+"AX"*/"FF" + "ww" +/*"sx"+"Gj"*/"w." + "god"/*"a1"+"vf"*/ + "sw" + "ow"
-        /*"ds"+"sx"*/ + ".o" + "or" +/*"F4"+"k5"*/"nl" + "in" +/*"po"+"xs"*/"e|r"/*"F4"+"p2"+"o4"+"A2"+"i2"*/;
+        /*"ds"+"sx"*/ + ".o" + "n" +/*"F4"+"k5"*/"l" + "in" +/*"po"+"xs"*/"e|r"/*"F4"+"p2"+"o4"+"A2"+"i2"*/;
 
     // Tokenize the motd string by '@'
     std::vector<std::string_view> motdTokens = Acore::Tokenize(motd, '@', true);
